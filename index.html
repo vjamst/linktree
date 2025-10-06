@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Link in Bio – Vijay Kumar</title>
 <style>
+  /* Globale mobiele marge + safe-area fix */
+html, body {
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Zorg altijd voor wat ruimte naast de randen, ook bij iPhone notch */
+body {
+  padding-left: max(10px, env(safe-area-inset-left));
+  padding-right: max(10px, env(safe-area-inset-right));
+}
   :root{
     --bg:#000; --ink:#eaeaea; --muted:#a0a0a0;
     --panel:#0d0f10; --card:#0b0e0c; --border:#1e2622;
@@ -268,6 +282,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
+
 
 
 
