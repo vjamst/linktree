@@ -52,9 +52,14 @@
   h2 .slash{color:var(--accent)}
 
   .stack{
-    display:grid; gap:16px; grid-template-columns:1fr;
-    place-items:center; width:100%;
-  }
+  display:grid;
+  gap:16px;
+  grid-template-columns:1fr;
+  place-items:center;
+  width:100%;
+  padding:0 10px; /* zorgt voor ruimte links en rechts op mobiel */
+  box-sizing:border-box;
+}
   .card-link{
     display:flex; align-items:center; gap:14px;
     padding:16px 18px; border-radius:16px; background:var(--card); border:1px solid #1a2a1f;
@@ -255,5 +260,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
+
 
 
