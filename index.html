@@ -45,6 +45,7 @@
   .bio{color:var(--muted); max-width:60ch}
 
   /* Lijsten / kaarten – gecentreerd */
+  .section{ width:100%; }
   .stack{
     display:grid; gap:16px; grid-template-columns:1fr;
     place-items:center;                         /* center de items */
@@ -55,90 +56,8 @@
     padding:16px 18px; border-radius:16px; background:var(--card); border:1px solid #1a2a1f;
     transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
     box-shadow:0 8px 22px #000a; outline:0; min-height:112px;
-    width:min(720px, 100%);                     /* vaste maxbreedte, gecentreerd */
-  }
-  .card-link:hover{transform:translateY(-2px); border-color:#2a6940; box-shadow:0 14px 30px #000c}
-  .card-link:focus-visible{box-shadow:0 0 0 4px var(--ring)}
-  .thumb{
-    width:64px; height:64px; border-radius:12px; overflow:hidden; flex:0 0 64px;
-    background:linear-gradient(180deg,#0f1511,#0b100d); border:1px solid #19331f; display:grid; place-items:center;
-  }
-  .thumb svg{width:28px; height:28px; fill:#b7f7ca}
-  .meta{min-width:0}
-  .title{font-weight:750}
-  .desc{font-size:.9rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-
-  /* Kopjes */
-  h2{margin:18px 2px 8px; font-size:.92rem; color:#c5f7d9; letter-spacing:.4px; text-transform:uppercase}
-  h2 .slash{color:var(--accent)}
-
-  /* “two-cols” overal → 1 kolom (zoals gevraagd voor workshops) */
-  .two-cols{display:grid; gap:16px; grid-template-columns:1fr; align-items:stretch}
-  .two-cols > .card-link{height:100%}
-
-  /* Socials */
-  footer{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:24px auto 6px}
-  .social{width:42px; height:42px; display:grid; place-items:center; border-radius:999px; border:1px solid var(--border); background:#0b0c0c; transition:transform .18s ease, border-color .18s ease}
-  .social:hover{transform:translateY(-2px); border-color:#235a36}
-  .social svg{width:20px; height:20px; fill:#b7f7ca}
-
-  /* Animaties */
-  .reveal{opacity:0; transform:translateY(16px)}
-  .reveal.show{opacity:1; transform:none; transition:opacity .6s ease, transform .6s ease}
-  .d1{transition-delay:.05s}.d2{transition-delay:.1s}.d3{transition-delay:.15s}.d4{transition-delay:.2s}.d5{transition-delay:.25s}.d6{transition-delay:.3s}
-  @media (prefers-reduced-motion:reduce){.reveal{opacity:1; transform:none}.card-link,.social{transition:none}}
-<style>
-  :root{
-    --bg:#000; --ink:#eaeaea; --muted:#a0a0a0;
-    --panel:#0d0f10; --card:#0b0e0c; --border:#1e2622;
-    --accent:#22c55e; --ring:#22c55e40;
-    --radius:20px; --maxw:760px;              /* was 980px → 760px */
-  }
-  *,*::before,*::after{box-sizing:border-box}
-  html,body{height:100%}
-  body{margin:0; background:var(--bg); color:var(--ink); font:500 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Arial; overflow-x:hidden}
-  a{color:inherit; text-decoration:none}
-  img{display:block; max-width:100%}
-
-  /* Matrix-regen in hoeken (canvas) */
-  .corner{position:fixed; z-index:-1; pointer-events:none; mix-blend-mode:screen}
-  #rainTL{left:0; top:0; width:48vw; height:48vh; mask: radial-gradient(90% 90% at 0% 0%, #000 60%, transparent 100%)}
-  #rainBR{right:0; bottom:0; width:48vw; height:48vh; mask: radial-gradient(90% 90% at 100% 100%, #000 60%, transparent 100%)}
-  .glow{
-    position:fixed; inset:0; z-index:-2; pointer-events:none;
-    background:
-      radial-gradient(800px 500px at 0% 0%, #00ff3735, transparent 60%),
-      radial-gradient(900px 600px at 100% 100%, #00ff3735, transparent 60%);
-  }
-
-  /* Layout */
-  .wrap{min-height:100dvh; display:grid; place-items:start center; padding:24px}
-  .sheet{width:100%; max-width:var(--maxw); margin:0 auto}
-
-  /* Header – gecentreerd */
-  header{
-    display:grid; grid-template-columns:1fr; place-items:center; gap:14px; text-align:center;
-    background:linear-gradient(180deg,#0c100d,#0a0d0b);
-    border:1px solid var(--border); border-radius:var(--radius);
-    padding:22px; box-shadow:0 10px 30px #0008; margin-bottom:18px;
-  }
-  .pfp{width:128px; height:128px; border-radius:999px; overflow:hidden; border:1px solid var(--border); background:#0f120f}
-  .pfp img{width:100%; height:100%; object-fit:cover; object-position:50% 20%}
-  .name{font-weight:800; font-size:1.8rem; letter-spacing:.2px; line-height:1.2}
-  .bio{color:var(--muted); max-width:60ch}
-
-  /* Lijsten / kaarten – gecentreerd */
-  .stack{
-    display:grid; gap:16px; grid-template-columns:1fr;
-    place-items:center;                         /* center de items */
     width:100%;
-  }
-  .card-link{
-    display:flex; align-items:center; gap:14px;
-    padding:16px 18px; border-radius:16px; background:var(--card); border:1px solid #1a2a1f;
-    transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
-    box-shadow:0 8px 22px #000a; outline:0; min-height:112px;
-    width:min(720px, 100%);                     /* vaste maxbreedte, gecentreerd */
+    max-width:720px;                             /* brede support i.p.v. min() */
   }
   .card-link:hover{transform:translateY(-2px); border-color:#2a6940; box-shadow:0 14px 30px #000c}
   .card-link:focus-visible{box-shadow:0 0 0 4px var(--ring)}
@@ -172,7 +91,7 @@
   @media (prefers-reduced-motion:reduce){.reveal{opacity:1; transform:none}.card-link,.social{transition:none}}
 
   /* =======================
-     MOBILE TUNING – PLOK HIERONDER
+     MOBILE TUNING
      ======================= */
   @media (max-width: 480px){
     :root{ --radius:16px; }
@@ -180,10 +99,7 @@
     .wrap{ padding:16px; }
     .sheet{ max-width:100%; }
 
-    header{
-      padding:16px;
-      gap:10px;
-    }
+    header{ padding:16px; gap:10px; }
     .pfp{ width:104px; height:104px; }
     .name{ font-size:1.5rem; }
     .bio{ font-size:.95rem; max-width:100%; }
@@ -191,8 +107,9 @@
     .stack{ gap:14px; }
     .card-link{
       width:100%;
+      max-width:100%;     /* override desktop max 720px */
       min-height:92px;
-      padding:14px 14px;
+      padding:14px;
       gap:12px;
       border-radius:14px;
     }
@@ -217,8 +134,6 @@
     .thumb{ width:48px; height:48px; flex-basis:48px; }
     .thumb svg{ width:20px; height:20px; }
   }
-</style>
-
 </style>
 </head>
 <body>
@@ -283,43 +198,45 @@
       </div>
     </section>
 
-    <!-- // MY_WORKSHOPS – nu 1 kolom, gecentreerd -->
+    <!-- // MY_WORKSHOPS (1 kolom) -->
     <section class="section">
-     <h2 class="reveal d4"><span class="slash">//</span> MY_WORKSHOPS</h2>
+      <h2 class="reveal d4"><span class="slash">//</span> MY_WORKSHOPS</h2>
       <div class="stack two-cols">
         <a class="card-link reveal d5" href="#" target="_blank" rel="noopener">
           <div class="thumb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-5 0-9 2.5-9 5.5V22h18v-2.5C21 16.5 17 14 12 14z"/></svg></div>
           <div class="meta"><div class="title">Personal Branding &amp; Online Profileren</div><div class="desc">Positioneer jezelf sterk en bouw een herkenbaar profiel.</div></div>
-          <span class="chev" aria-hidden="true"></span>
+          <span class="chev" aria-hidden="true">➜</span>
         </a>
 
         <a class="card-link reveal d6" href="#" target="_blank" rel="noopener">
           <div class="thumb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v10H7l-3 3V4z"/></svg></div>
-          <div class="meta"><div class="title">Netwerken &amp; Presenteren</div><div class="desc">Leer slim en overtuigend netwerken en pitchen.</div></div>
-          <span class="chev" aria-hidden="true"></span>
+          <div class="meta"><div class="title">Netwerken &amp; Presenteren</div><div class="desc">Leer slim en overtuigend netwerken.</div></div>
+          <span class="chev" aria-hidden="true">➜</span>
         </a>
 
         <a class="card-link reveal d6" href="#" target="_blank" rel="noopener">
           <div class="thumb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 4h18v16H3zM5 8h14M5 12h10"/></svg></div>
-          <div class="meta"><div class="title">Marketing</div><div class="desc">Online en offline opvallen.</div></div>
-          <span class="chev" aria-hidden="true"></span>
+          <div class="meta"><div class="title">(Portfolio) Website maken</div><div class="desc">Maak een website om op te vallen.</div></div>
+          <span class="chev" aria-hidden="true">➜</span>
         </a>
 
         <a class="card-link reveal d6" href="#" target="_blank" rel="noopener">
           <div class="thumb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5z"/></svg></div>
           <div class="meta"><div class="title">AI-tools inzetten voor je werk</div><div class="desc">Praktische AI-workshops met directe toepasbaarheid.</div></div>
-          <span class="chev" aria-hidden="true"></span>
+          <span class="chev" aria-hidden="true">➜</span>
         </a>
       </div>
     </section>
 
+    <!-- Socials (optioneel) -->
     <footer class="reveal d6" aria-label="Social media">
-      <!-- socials (ongewijzigd) -->
+      <!-- Voeg je socials hier toe indien gewenst -->
     </footer>
   </div>
 </main>
 
 <script>
+/* Matrix-regen alleen in de hoeken */
 function cornerRain(canvas){
   const c = canvas, ctx = c.getContext('2d');
   function size(){ c.width = c.clientWidth; c.height = c.clientHeight; }
@@ -347,6 +264,7 @@ function cornerRain(canvas){
 cornerRain(document.getElementById('rainTL'));
 cornerRain(document.getElementById('rainBR'));
 
+/* Reveal on view */
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
 },{threshold:.1});
