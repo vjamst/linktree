@@ -149,6 +149,21 @@ body {
     .thumb{ width:48px; height:48px; flex-basis:48px; }
     .thumb svg{ width:20px; height:20px; }
   }
+  /* --- Finale, eenvoudige layout-fix --- */
+main{
+  max-width: var(--maxw);      /* bv. 760px uit je :root */
+  margin-inline: auto;         /* centreert de hele pagina-inhoud */
+  padding-inline: 12px;        /* gelijke ruimte links + rechts op mobiel */
+  box-sizing: border-box;
+}
+
+.stack{ padding: 0; }          /* geen extra padding hier */
+
+.card-link{
+  width: 100%;                 /* kaart = volle breedte van de container */
+  max-width: 100%;             /* laat main bepalen hoe breed het mag */
+  margin: 0;                   /* geen extra centrering hier nodig */
+}
 </style>
 </head>
 <body>
@@ -282,6 +297,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
+
 
 
 
