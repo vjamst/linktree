@@ -60,7 +60,7 @@
     padding:16px 18px; border-radius:16px; background:var(--card); border:1px solid #1a2a1f;
     transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
     box-shadow:0 8px 22px #000a; outline:0; min-height:112px;
-    width:100%; max-width:720px;   /* brede support i.p.v. min() */
+    width:calc(100% - 10px); max-width:720px; margin:0 auto;
   }
   .card-link:hover{transform:translateY(-2px); border-color:#2a6940; box-shadow:0 14px 30px #000c}
   .card-link:focus-visible{box-shadow:0 0 0 4px var(--ring)}
@@ -255,4 +255,5 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
+
 
