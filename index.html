@@ -6,30 +6,29 @@
 <title>Link in Bio – Vijay Kumar</title>
 <style>
   /* Globale mobiele marge + safe-area fix */
-html, body {
-  margin: 0;
-  width: 100%;
-  overflow-x: hidden;
-}
+  html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
 
-*, *::before, *::after { box-sizing: border-box; }
+  /* Zorg altijd voor wat ruimte naast de randen, ook bij iPhone notch */
+  body {
+    background:#000; color:#eaeaea;
+    font:500 16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
+  }
 
-/* Zorg altijd voor wat ruimte naast de randen, ook bij iPhone notch */
-body {
-  padding-left: max(10px, env(safe-area-inset-left));
-  padding-right: max(10px, env(safe-area-inset-right));
-}
   :root{
     --bg:#000; --ink:#eaeaea; --muted:#a0a0a0;
     --panel:#0d0f10; --card:#0b0e0c; --border:#1e2622;
     --accent:#22c55e; --ring:#22c55e40;
     --radius:20px; --maxw:760px;
   }
-  *,*::before,*::after{box-sizing:border-box}
-  html,body{height:100%}
-  body{margin:0; background:var(--bg); color:var(--ink);
-       font:500 16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-       overflow-x:hidden}
+
   a{color:inherit; text-decoration:none}
   img{display:block; max-width:100%}
 
@@ -65,32 +64,35 @@ body {
   h2{margin:18px 2px 8px; font-size:.92rem; color:#c5f7d9; letter-spacing:.4px; text-transform:uppercase}
   h2 .slash{color:var(--accent)}
 
+  /* STACK: links uitlijnen i.p.v. centreren */
   .stack{
-  display:grid;
-  gap:16px;
-  grid-template-columns:1fr;
-  place-items:center;
-  width:100%;
-  padding:0 10px; /* zorgt voor ruimte links en rechts op mobiel */
-  box-sizing:border-box;
-}
+    display:grid;
+    gap:16px;
+    grid-template-columns:1fr;
+    justify-items:stretch;   /* horizontaal rekken/links */
+    align-items:center;      /* verticaal */
+    width:100%;
+    padding:0 10px;          /* veilige marge mobiel */
+    box-sizing:border-box;
+  }
+
+  /* Schone card-link (dubbele/ingesloten blok verwijderd) */
   .card-link{
     display:flex; align-items:center; gap:14px;
-    padding:16px 18px; border-radius:16px; background:var(--card); border:1px solid #1a2a1f;
+    padding:16px 18px;
+    border-radius:16px;
+    background:var(--card);
+    border:1px solid #1a2a1f;
     transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
-    box-shadow:0 8px 22px #000a; outline:0; min-height:112px;
-    .card-link{
-  display:flex; align-items:center; gap:14px;
-  padding:16px 18px; border-radius:16px; background:var(--card); border:1px solid #1a2a1f;
-  transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease;
-  box-shadow:0 8px 22px #000a; outline:0; min-height:112px;
-  width:100%;              /* ← geen calc meer nodig */
-  max-width:720px;
-  margin:0 auto;
-}
+    box-shadow:0 8px 22px #000a;
+    outline:0;
+    min-height:112px;
+    width:100%;
+    max-width:720px;
   }
   .card-link:hover{transform:translateY(-2px); border-color:#2a6940; box-shadow:0 14px 30px #000c}
   .card-link:focus-visible{box-shadow:0 0 0 4px var(--ring)}
+
   .thumb{
     width:64px; height:64px; border-radius:12px; overflow:hidden; flex:0 0 64px;
     background:linear-gradient(180deg,#0f1511,#0b100d); border:1px solid #19331f; display:grid; place-items:center;
@@ -117,7 +119,17 @@ body {
   @media (prefers-reduced-motion:reduce){
     .reveal{opacity:1; transform:none}
     .card-link,.social{transition:none}
-  } /* ← BELANGRIJK: sluit dit blok af */
+  }
+
+  /* --- Basis container (centering + gelijke gutters) --- */
+  main{
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: 12px;
+    box-sizing: border-box;
+  }
+  .stack{ padding: 0; }          /* geen extra padding hier */
+  .card-link{ max-width:100%; margin:0; }
 
   /* ======= MOBILE TUNING ======= */
   @media (max-width:480px){
@@ -131,8 +143,14 @@ body {
     .bio{ font-size:.95rem; max-width:100%; }
 
     .stack{ gap:14px; }
+
+    /* subtiel links “nudgen” */
+    main{ padding-left:8px; padding-right:16px; }
+
     .card-link{
       width:100%; max-width:100%;
+      margin-left:-8px;     /* duwt kaart visueel wat naar links */
+      margin-right:8px;     /* behoud rechtergutter */
       min-height:92px; padding:14px; gap:12px; border-radius:14px;
     }
     .thumb{ width:52px; height:52px; flex:0 0 52px; border-radius:10px; }
@@ -149,21 +167,6 @@ body {
     .thumb{ width:48px; height:48px; flex-basis:48px; }
     .thumb svg{ width:20px; height:20px; }
   }
-  /* --- Finale, eenvoudige layout-fix --- */
-main{
-  max-width: var(--maxw);      /* bv. 760px uit je :root */
-  margin-inline: auto;         /* centreert de hele pagina-inhoud */
-  padding-inline: 12px;        /* gelijke ruimte links + rechts op mobiel */
-  box-sizing: border-box;
-}
-
-.stack{ padding: 0; }          /* geen extra padding hier */
-
-.card-link{
-  width: 100%;                 /* kaart = volle breedte van de container */
-  max-width: 100%;             /* laat main bepalen hoe breed het mag */
-  margin: 0;                   /* geen extra centrering hier nodig */
-}
 </style>
 </head>
 <body>
@@ -297,9 +300,3 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
-
-
-
-
-
-
