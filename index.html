@@ -14,7 +14,6 @@
   }
   *, *::before, *::after { box-sizing: border-box; }
 
-  /* Zorg altijd voor wat ruimte naast de randen, ook bij iPhone notch */
   body {
     background:#000; color:#eaeaea;
     font:500 16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial;
@@ -27,18 +26,32 @@
     --panel:#0d0f10; --card:#0b0e0c; --border:#1e2622;
     --accent:#22c55e; --ring:#22c55e40;
     --radius:20px; --maxw:760px;
-    --cardw: 640px; /* smallere kolom op desktop/tablet – pas naar smaak aan */
+    --cardw: 640px;           /* desktop/tablet kolombreedte */
   }
 
   a{color:inherit; text-decoration:none}
   img{display:block; max-width:100%}
 
-  /* Matrix-regen in hoeken (canvas) */
-  .corner{position:fixed; z-index:-1; pointer-events:none; mix-blend-mode:screen}
-  #rainTL{left:0; top:0; width:48vw; height:48vh; mask: radial-gradient(90% 90% at 0% 0%, #000 60%, transparent 100%)}
-  #rainBR{right:0; bottom:0; width:48vw; height:48vh; mask: radial-gradient(90% 90% at 100% 100%, #000 60%, transparent 100%)}
+  /* ===== Matrix-regen in de hoeken (iOS fixes inbegrepen) ===== */
+  .corner{
+    position: fixed;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 0; /* iOS: niet -1, anders valt het achter body */
+  }
+  #rainTL{
+    left:0; top:0; width:48vw; height:48vh;
+    -webkit-mask: radial-gradient(90% 90% at 0% 0%, #000 60%, transparent 100%);
+            mask: radial-gradient(90% 90% at 0% 0%, #000 60%, transparent 100%);
+  }
+  #rainBR{
+    right:0; bottom:0; width:48vw; height:48vh;
+    -webkit-mask: radial-gradient(90% 90% at 100% 100%, #000 60%, transparent 100%);
+            mask: radial-gradient(90% 90% at 100% 100%, #000 60%, transparent 100%);
+  }
   .glow{
-    position:fixed; inset:0; z-index:-2; pointer-events:none;
+    position:fixed; inset:0; pointer-events:none;
+    z-index:-1; /* één laag onder de canvas-hoekregen */
     background:
       radial-gradient(800px 500px at 0% 0%, #00ff3735, transparent 60%),
       radial-gradient(900px 600px at 100% 100%, #00ff3735, transparent 60%);
@@ -77,7 +90,7 @@
     box-sizing:border-box;
   }
 
-  /* Schone card-link */
+  /* Kaart */
   .card-link{
     display:flex; align-items:center; gap:14px;
     padding:16px 18px;
@@ -89,7 +102,7 @@
     outline:0;
     min-height:112px;
     width:100%;
-    max-width:720px; /* wordt op desktop/tablet en mobiel hieronder begrensd */
+    max-width:720px;
   }
   .card-link:hover{transform:translateY(-2px); border-color:#2a6940; box-shadow:0 14px 30px #000c}
   .card-link:focus-visible{box-shadow:0 0 0 4px var(--ring)}
@@ -103,11 +116,9 @@
   .title{font-weight:750}
   .desc{font-size:.9rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 
-  /* Altijd 1 kolom */
   .two-cols{display:grid; gap:16px; grid-template-columns:1fr; align-items:stretch}
   .two-cols > .card-link{height:100%}
 
-  /* Socials */
   footer{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:24px auto 6px}
   .social{width:42px; height:42px; display:grid; place-items:center; border-radius:999px; border:1px solid var(--border); background:#0b0c0c; transition:transform .18s ease, border-color .18s ease}
   .social:hover{transform:translateY(-2px); border-color:#235a36}
@@ -122,7 +133,7 @@
     .card-link,.social{transition:none}
   }
 
-  /* --- Basis container (centering + gelijke gutters) --- */
+  /* Basis container */
   main{
     max-width: var(--maxw);
     margin-inline: auto;
@@ -132,12 +143,11 @@
   .stack{ padding: 0; }
   .card-link{ max-width:100%; margin:0; }
 
-  /* -------- Smallere kolom op desktop/tablet -------- */
+  /* Smallere kolom op desktop/tablet */
   @media (min-width: 768px){
     header{ max-width: var(--cardw); margin-inline:auto; }
     .section > h2{ max-width: var(--cardw); margin:18px auto 8px; padding-inline:4px; }
     .card-link{ max-width: var(--cardw); margin-inline:auto; }
-    /* iets compacter op grote schermen */
     .card-link{ padding:14px 16px; }
     header{ padding-left:18px; padding-right:18px; }
   }
@@ -148,18 +158,16 @@
     .wrap{ padding:16px; }
     .sheet{ max-width:100%; }
 
-    /* HEADER (grootte + nudge) */
+    /* Header smaller + naar links */
     header{
       padding:16px;
       gap:10px;
-      margin-left:-10px;  /* jouw nudge */
-      margin-right:10px;
-      padding-left:14px;  /* extra lucht links */
-      /* place-items:start; text-align:left;  ← zet aan als je links wilt uitlijnen */
+      padding-left:14px;
       width: var(--mobileCardW);
       max-width: var(--mobileCardW);
-      margin-left: 6px !important;     /* override nudge: links smaller */
-      margin-right: auto !important;    /* open ruimte rechts */
+      margin-left: 6px !important;
+      margin-right: auto !important;
+      /* place-items:start; text-align:left;  ← zet aan als je inhoud links wilt */
     }
     .pfp{ width:104px; height:104px; }
     .name{ font-size:1.5rem; }
@@ -167,10 +175,10 @@
 
     .stack{ gap:14px; }
 
-    /* subtiel links “nudgen” + smallere breedte */
+    /* content-gutters */
     main{ padding-left:6px; padding-right:18px; }
 
-    /* kaarten net zo smal als header en links uitgelijnd */
+    /* Sectietitels en kaarten even smal als header */
     .section > h2,
     .card-link{
       width: var(--mobileCardW);
@@ -299,22 +307,27 @@ function cornerRain(canvas){
   const c = canvas, ctx = c.getContext('2d');
   function size(){ c.width = c.clientWidth; c.height = c.clientHeight; }
   size(); addEventListener('resize', size, {passive:true});
+
   const chars = "001001101010011001001010010110100100101001".split("");
   let font = 16, cols = 0, drops = [];
+
   function reset(){
     font = Math.max(12, Math.floor(Math.min(c.width,c.height)/28));
     cols = Math.ceil(c.width / font);
     drops = Array.from({length: cols}, () => Math.floor(Math.random()*-20));
   }
   reset();
+
   (function draw(){
-    ctx.fillStyle = "rgba(0,0,0,0.06)"; ctx.fillRect(0,0,c.width,c.height);
-    ctx.fillStyle = "#22c55e"; ctx.font = font + "px monospace";
+    ctx.fillStyle = "rgba(0,0,0,0.06)";
+    ctx.fillRect(0,0,c.width,c.height);
+    ctx.fillStyle = "#22c55e";
+    ctx.font = font + "px monospace";
     for(let i=0;i<drops.length;i++){
       const ch = chars[Math.floor(Math.random()*chars.length)];
       ctx.fillText(ch, i*font, drops[i]*font);
       if(drops[i]*font > c.height && Math.random() > 0.975) drops[i] = 0;
-      drops++;
+      drops[i]++; // << correct increment
     }
     requestAnimationFrame(draw);
   })();
