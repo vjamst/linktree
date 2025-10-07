@@ -27,6 +27,7 @@
     --panel:#0d0f10; --card:#0b0e0c; --border:#1e2622;
     --accent:#22c55e; --ring:#22c55e40;
     --radius:20px; --maxw:760px;
+    --cardw: 640px; /* smallere kolom op desktop/tablet – pas naar smaak aan */
   }
 
   a{color:inherit; text-decoration:none}
@@ -47,7 +48,7 @@
   .wrap{min-height:100dvh; display:grid; place-items:start center; padding:24px}
   .sheet{width:100%; max-width:var(--maxw); margin:0 auto}
 
-  /* Header – gecentreerd */
+  /* Header */
   header{
     display:grid; grid-template-columns:1fr; place-items:center; gap:14px; text-align:center;
     background:linear-gradient(180deg,#0c100d,#0a0d0b);
@@ -69,14 +70,14 @@
     display:grid;
     gap:16px;
     grid-template-columns:1fr;
-    justify-items:stretch;   /* horizontaal rekken/links */
-    align-items:center;      /* verticaal */
+    justify-items:stretch;
+    align-items:center;
     width:100%;
-    padding:0 10px;          /* veilige marge mobiel */
+    padding:0 10px;
     box-sizing:border-box;
   }
 
-  /* Schone card-link (dubbele/ingesloten blok verwijderd) */
+  /* Schone card-link */
   .card-link{
     display:flex; align-items:center; gap:14px;
     padding:16px 18px;
@@ -88,7 +89,7 @@
     outline:0;
     min-height:112px;
     width:100%;
-    max-width:720px;
+    max-width:720px; /* wordt op desktop/tablet en mobiel hieronder begrensd */
   }
   .card-link:hover{transform:translateY(-2px); border-color:#2a6940; box-shadow:0 14px 30px #000c}
   .card-link:focus-visible{box-shadow:0 0 0 4px var(--ring)}
@@ -128,38 +129,58 @@
     padding-inline: 12px;
     box-sizing: border-box;
   }
-  .stack{ padding: 0; }          /* geen extra padding hier */
+  .stack{ padding: 0; }
   .card-link{ max-width:100%; margin:0; }
+
+  /* -------- Smallere kolom op desktop/tablet -------- */
+  @media (min-width: 768px){
+    header{ max-width: var(--cardw); margin-inline:auto; }
+    .section > h2{ max-width: var(--cardw); margin:18px auto 8px; padding-inline:4px; }
+    .card-link{ max-width: var(--cardw); margin-inline:auto; }
+    /* iets compacter op grote schermen */
+    .card-link{ padding:14px 16px; }
+    header{ padding-left:18px; padding-right:18px; }
+  }
 
   /* ======= MOBILE TUNING ======= */
   @media (max-width:480px){
-    :root{ --radius:16px; }
+    :root{ --radius:16px; --mobileCardW: 92vw; } /* pas 90–94vw naar smaak aan */
     .wrap{ padding:16px; }
     .sheet{ max-width:100%; }
 
-    header{ padding:16px; gap:10px; }
+    /* HEADER (grootte + nudge) */
+    header{
+      padding:16px;
+      gap:10px;
+      margin-left:-10px;  /* jouw nudge */
+      margin-right:10px;
+      padding-left:14px;  /* extra lucht links */
+      /* place-items:start; text-align:left;  ← zet aan als je links wilt uitlijnen */
+      width: var(--mobileCardW);
+      max-width: var(--mobileCardW);
+      margin-left: 6px !important;     /* override nudge: links smaller */
+      margin-right: auto !important;    /* open ruimte rechts */
+    }
     .pfp{ width:104px; height:104px; }
     .name{ font-size:1.5rem; }
     .bio{ font-size:.95rem; max-width:100%; }
-    /* header dezelfde “links-nudge” geven als je kaarten */
-header{
-  margin-left:-10px;   /* neem hier dezelfde waarde als je .card-link */
-  margin-right:10px;   /* idem, zodat de randen gelijk lopen */
-  /* optioneel: wat extra lucht links */
-  padding-left:14px;
-}
-
 
     .stack{ gap:14px; }
 
-    /* subtiel links “nudgen” */
+    /* subtiel links “nudgen” + smallere breedte */
     main{ padding-left:6px; padding-right:18px; }
 
+    /* kaarten net zo smal als header en links uitgelijnd */
+    .section > h2,
     .card-link{
-      width:100%; max-width:100%;
-      margin-left:-10px;     /* duwt kaart visueel wat naar links */
-      margin-right:10px;     /* behoud rechtergutter */
-      min-height:92px; padding:14px; gap:12px; border-radius:14px;
+      width: var(--mobileCardW);
+      max-width: var(--mobileCardW);
+      margin-left: 6px !important;
+      margin-right: auto !important;
+    }
+
+    .card-link{
+      min-height:88px; padding:14px 16px; gap:12px; border-radius:14px;
     }
     .thumb{ width:52px; height:52px; flex:0 0 52px; border-radius:10px; }
     .thumb svg{ width:22px; height:22px; }
@@ -293,7 +314,7 @@ function cornerRain(canvas){
       const ch = chars[Math.floor(Math.random()*chars.length)];
       ctx.fillText(ch, i*font, drops[i]*font);
       if(drops[i]*font > c.height && Math.random() > 0.975) drops[i] = 0;
-      drops[i]++;
+      drops++;
     }
     requestAnimationFrame(draw);
   })();
@@ -308,5 +329,3 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
-
-
