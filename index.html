@@ -141,6 +141,14 @@
     .pfp{ width:104px; height:104px; }
     .name{ font-size:1.5rem; }
     .bio{ font-size:.95rem; max-width:100%; }
+    /* header dezelfde “links-nudge” geven als je kaarten */
+header{
+  margin-left:-10px;   /* neem hier dezelfde waarde als je .card-link */
+  margin-right:10px;   /* idem, zodat de randen gelijk lopen */
+  /* optioneel: wat extra lucht links */
+  padding-left:14px;
+}
+
 
     .stack{ gap:14px; }
 
@@ -300,4 +308,5 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
+
 
