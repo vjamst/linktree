@@ -247,18 +247,26 @@
       <div class="stack two-cols">
         <a class="card-link reveal d3" href="https://vjamst.github.io/nl-taaltrainer/" target="_blank" rel="noopener">
           <div class="thumb">
-            <!-- SVG ICON: Nederlands — klompje -->
+            <!-- SVG ICON: Nederlands — windmill -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-     width="40" height="40" aria-label="Nederlands — klomp" role="img">
+     width="40" height="40" aria-label="Nederlands — molen" role="img">
   <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Klomp-contour -->
-    <path d="M4 13.5c0 2.6 1.8 4 4.2 4.5 2 .4 4.5.5 6.6 0 2.3-.6 3.7-1.9 4.5-3.7
-             .3-.7.2-1.3-.3-1.7-.7-.6-2-.7-3.2-.9-1.6-.2-2.6-.6-3.5-1.4
-             -.5-.4-.8-.9-1.1-1.6-.3-.8-.8-1.2-1.6-1.3-1.2-.2-2.7.3-3.8 1.1
-             -1.2.9-1.8 1.8-1.8 3z"/>
-    <!-- Instap-rand (decorlijn) -->
-    <path d="M7.5 10.8c1.2-.8 2.9-1.1 4.1-.2"/>
+    <!-- Wieken -->
+    <line x1="12" y1="8" x2="12" y2="3"/>
+    <line x1="12" y1="8" x2="17" y2="6"/>
+    <line x1="12" y1="8" x2="7"  y2="6"/>
+    <line x1="12" y1="8" x2="12" y2="13"/>
+    <!-- Kap / dak -->
+    <path d="M8 12l4-3 4 3"/>
+    <!-- Toren / huis -->
+    <path d="M9 12h6v6H9z"/>
+    <!-- Deur -->
+    <path d="M11 14h2v4h-2z"/>
+    <!-- (optioneel) grondlijn -->
+    <path d="M6 18.5h12"/>
   </g>
+  <!-- Naaf van de wieken -->
+  <circle cx="12" cy="8" r="1" fill="currentColor"/>
 </svg>
   </div>
   <div class="meta">
@@ -319,6 +327,30 @@
   <div class="meta">
     <div class="title">Engels Language trainer</div>
     <div class="desc">Oefenen met de Engelse taal en grammatica</div>
+  </div>
+  <span class="chev">➜</span>
+  <!-- To Do List Planner -->
+<a class="card-link reveal d3" href="https://vjamst.github.io/todolist/" target="_blank" rel="noopener">
+  <div class="thumb">
+    <!-- SVG ICON: Calendar -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+         width="40" height="40" aria-label="Calendar" role="img">
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <!-- ringen -->
+        <path d="M7 3v3M17 3v3"/>
+        <!-- frame -->
+        <rect x="3.5" y="5.5" width="17" height="15" rx="2.5" ry="2.5"/>
+        <!-- scheidingslijn -->
+        <path d="M3.5 9.5h17"/>
+        <!-- puntjes als dagen -->
+        <path d="M7 12h0M10 12h0M13 12h0M16 12h0
+                 M7 15h0M10 15h0M13 15h0M16 15h0"/>
+      </g>
+    </svg>
+  </div>
+  <div class="meta">
+    <div class="title">to do list planner</div>
+    <div class="desc">to do list met calender integratie</div>
   </div>
   <span class="chev">➜</span>
 </a>
@@ -417,6 +449,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
+
 
 
 
